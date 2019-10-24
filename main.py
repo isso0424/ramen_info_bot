@@ -1,9 +1,11 @@
 import discord
 import toke
 import datetime
+# toke.pyのtoke()からトークンを引っ張ってくる
 TOKEN = toke.toke()
+# クライアント取得
 client = discord.Client()
-
+# 定休日のdict
 regular_holiday = {
     "現代": [1],
     "大進": [0, 1],
@@ -24,10 +26,14 @@ regular_holiday = {
 daidai = [2, 4]
 
 
+# メッセージが送信された際の処理
 @client.event
+# 引数としてmessageを受け取る
 async def on_message(message):
+    # Botを排除
     if message.author.bot:
         return
+    # /をコマンドを入力するkeyにする
     if message.content[0] == "/":
         mess = message.content[1:]
         if "Ramen" in mess:
@@ -43,6 +49,9 @@ async def on_message(message):
                 send_text += r + "\n"
             send_text += "です"
             await message.channel.send(send_text)
+        elif "help" in mess:
+            await message.channel.send('/Ramen: show ramen shop that today is business day in Katsuta\n/help: show '
+                                       'all command this bot')
         else:
             await message.channel.send("Error: Input invalid command.\nPlease check command list to type \"/help\"")
 
