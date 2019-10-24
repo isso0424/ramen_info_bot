@@ -25,13 +25,6 @@ daidai = [2, 4]
 
 
 @client.event
-async def on_ready():
-    ch = 636554025160015874
-    channel = client.get_channel(ch)
-    await channel.send("login")
-
-
-@client.event
 async def on_message(message):
     if message.author.bot:
         return
